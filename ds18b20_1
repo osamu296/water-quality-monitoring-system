@@ -1,0 +1,48 @@
+#include <OneWire.h>
+#include <DallasTemperature.h>
+
+#define ONE_WIRE_BUS 5
+
+OneWire oneWire(ONE_WIRE_BUS);
+
+DallasTemperature sensors(&oneWire);
+
+ float Celcius=0.0;
+ float Fahrenheit=0.0;
+void setup(void)
+{
+  
+  Serial.begin(9600);
+  sensors.begin();
+}
+
+void loop(void)
+{ 
+  sensors.requestTemperatures(); 
+  Celcius=sensors.getTempCByIndex(0);
+  Fahrenheit=sensors.toFahrenheit(Celcius);
+  
+  Serial.println("Curent Temperature ");
+  Serial.print(" C  ");
+  Serial.println(Celcius);
+  delay(1000);
+
+    if(Celcius>30 && Celcius<100){
+      Serial.println(" Lower Temp ");
+      Serial.print(" C  ");
+      Serial.println(Celcius);
+      delay(1000);
+ }
+   else if(Celcius<27 && Celcius>= 0){
+      Serial.println(" IncreaseTemp ");
+      Serial.print(" C  ");
+      Serial.println(Celcius);
+      delay(1000);
+ }
+    else{
+      Serial.println(" Temperature Stable ");
+      Serial.print(" C  ");
+      Serial.println(Celcius);
+      delay(1000);
+ }  
+}
