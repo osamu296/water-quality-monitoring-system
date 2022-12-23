@@ -1,0 +1,38 @@
+const int b = 5; 
+const int relay_pump = 2; 
+const int b2 = 4; 
+const int relay_pump2 = 3; 
+int pushb;
+
+void setup()
+{
+  pinMode(b, INPUT_PULLUP);
+  pinMode(relay_pump, OUTPUT);
+  pinMode(b2, INPUT_PULLUP);
+  pinMode(relay_pump2, OUTPUT);
+}
+
+void loop()
+{
+  int pushb = digitalRead(b);
+  int pushb2 = digitalRead(b2);
+  
+  if (pushb == LOW) // We press the button
+  {
+    digitalWrite(relay_pump, HIGH); // the water pump fills the bottle
+  }
+    else // we release the button
+  {
+    digitalWrite(relay_pump, LOW); // the water pump stops
+  }
+
+  
+  if (pushb2 == LOW) // We press the button
+  {
+    digitalWrite(relay_pump2, HIGH); // the water pump fills the bottle
+  }
+    else // we release the button
+  {
+    digitalWrite(relay_pump2, LOW); // the water pump stops
+  }
+}
